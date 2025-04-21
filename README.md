@@ -15,9 +15,7 @@
 
 ![screen1](https://sun9-37.userapi.com/s/v1/ig2/MtVyvJ-vGDApGb9cxrujmo6YT-1V-DpviveYCaQKrd4CduZqXHIIwRm8zlpbu9NW4WHTuigj2OZmiDX8sBUfVKeM.jpg?quality=95&as=32x39,48x58,72x87,108x131,160x193,240x290,360x435,480x580,540x653,640x774,720x870,1059x1280&from=bu&u=-Pghxc5xzzkqBdjmPCe4A7Eq3t9ssKJnKgXmhIy3k5M&cs=1059x1280)
 
-```
-Код тут
-```
+## [Код для создания таблиц](https://github.com/darwinqqq/greenplum/blob/master/function/create_table.sql)
 ## 2.Необходимо создать внешние таблицы в Greenplum c использованием протокола PXF и gpfdist
 ### 1. Необходимо создать внешние таблицы в Greenplum c использованием протокола PXF для доступа к данным следующих таблиц базы Postgres: 
 - gp.plan 
@@ -31,17 +29,18 @@
 create_table.sql
 ```
 # 3."Пользовательские функции"
-## 1. Создайте 2 пользовательские функции в схеме std <номер студента> для загрузки данных в созданные на 2-ом уроке таблицы: 
+## 1. Создайте 2 пользовательские функции для загрузки данных в созданные таблицы: 
 - 1.Загрузка данных в целевые таблицы должна производиться из внешних EXTERNAL таблиц.
 - 2.Первая функция для загрузки справочников, вторая - для загрузки таблиц фактов.
 - 3.Для таблиц справочников необходимо реализовать FULL загрузку (полная очистка целевой таблицы и полная вставка всех записей).
 - 4.Для таблиц фактов можно реализовать загрузку следующими способами:
    - DELTA_PARTITION - полная подмена партиций.
    - DELTA_UPSERT - предварительное удаление по ключу и последующая вставка записей из временной таблицы в целевую.
-```
-f_full.sql
-f_delta_partition.sql
-```
+## [Код для full загрузки](https://github.com/darwinqqq/greenplum/blob/master/function/f_full.sql)
+
+## [Код для delta_partition](https://github.com/darwinqqq/greenplum/blob/master/function/f_delta_partition.sql)
+
+
 ## 2. Создайте пользовательскую функцию в схеме std <номер студента> для расчёта витрины, которая будет содержать результат выполнения плана продаж в разрезе: 
 - Код "Региона".
 - Код "Товарного направления" (matdirec).
@@ -56,7 +55,7 @@ f_delta_partition.sql
 - 2.Таблица должна формироваться в схеме std <номер студента>.
 - 3.Название таблицы должно формироваться по шаблону plan_fact_<YYYYMM>, где <YYYYMM> - месяц расчета. 
 - 4.Функция должна иметь возможность безошибочного запуска несколько раз по одному и тому же месяцу. 
-```
-f_load_mart.sql
-f_load_write_log.sql
-```
+
+## [Код для создания витрины](https://github.com/darwinqqq/greenplum/blob/master/function/f_mart.sql)
+
+## [Код для логов](https://github.com/darwinqqq/greenplum/blob/master/function/f_load_write_log.sql)
