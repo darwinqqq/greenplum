@@ -1,0 +1,77 @@
+CREATE EXTERNAL TABLE std11_3.plan_ext (
+    "date" date ,
+	region varchar(20) ,
+	matdirec varchar(20) ,
+	quantity int4 ,
+	distr_chan varchar(100)
+)
+LOCATION ( 'pxf://gp.plan?PROFILE=Jdbc&JDBC_DRIVER=org.postgresql.Driver&DB_URL=jdbc:postgresql://192.168.214.212:5432/postgres&USER=intern&PASS=intern'
+) ON ALL
+FORMAT 'CUSTOM' ( FORMATTER='pxfwritable_import' )
+ENCODING 'UTF8';
+
+
+
+
+
+CREATE EXTERNAL TABLE std11_3.sales_ext (
+    "date" date ,
+	region varchar(20) ,
+	material varchar(20),
+	distr_chan varchar(100) ,
+	quantity int4 ,
+	check_nm varchar(100) ,
+	check_pos varchar(100)
+)
+location ('pxf://gp.sales?PROFILE=Jdbc&JDBC_DRIVER=org.postgresql.Driver&DB_URL=jdbc:postgresql://192.168.214.212:5432/postgres&USER=intern&PASS=intern&PARTITION_BY=date:date&RANGE=2021-01-02:2021-07-26&INTERVAL=1:month'
+) 
+FORMAT 'CUSTOM' ( FORMATTER='pxfwritable_import' );
+
+
+
+
+CREATE external TABLE std11_3.product_ext (
+    material INT ,
+    asgrp INT,
+    brand INT,
+    matcateg VARCHAR,
+    matdirec INT,
+    txt VARCHAR
+)
+LOCATION ('gpfdist://192.168.1.47:8080/product.csv')
+FORMAT 'CSV' (DELIMITER ';')
+ENCODING 'UTF8'
+segment reject limit 10 rows;
+
+CREATE external TABLE std11_3.region_ext (
+    region VARCHAR,
+    txt VARCHAR
+) 
+LOCATION ('gpfdist://192.168.1.47:8080/region.csv')
+FORMAT 'CSV' (DELIMITER ';')
+ENCODING 'UTF8'; 
+
+CREATE external TABLE std11_3.channel_ext (
+    distr_chan INT ,
+    txtsh VARCHAR(255)
+)
+LOCATION ('gpfdist://192.168.1.47:8080/channel.csv')
+FORMAT 'CSV' (DELIMITER ',');
+
+
+CREATE external TABLE std11_3.price_ext (
+    material INT,
+    region VARCHAR,
+    distr_chan INT,
+    price INT,
+    PRIMARY KEY (material, region, distr_chan),
+    FOREIGN KEY (material) REFERENCES std11_3.product(material),
+    FOREIGN KEY (region) REFERENCES std11_3.region(region),
+    FOREIGN KEY (distr_chan) REFERENCES std11_3.channel(distr_chan)
+) 
+LOCATION ('gpfdist://192.168.1.47:8080/price.csv')
+FORMAT 'CSV' (DELIMITER ',')
+DISTRIBUTED BY (material);
+
+
+
