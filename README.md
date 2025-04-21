@@ -20,14 +20,14 @@
 ### 1. Необходимо создать внешние таблицы в Greenplum c использованием протокола PXF для доступа к данным следующих таблиц базы Postgres: 
 - gp.plan 
 - gp.sales 
+## [Код для pxf](https://github.com/darwinqqq/greenplum/blob/master/function/f_pxf.sql)
 ### 2. Необходимо создать внешние таблицы в Greenplum c использованием протокола gpfdist для доступа к данным следующих файлов CSV: 
-- price 
-- chanel 
-- product 
-- region 
-```
-create_table.sql
-```
+- [price](https://github.com/darwinqqq/greenplum/blob/master/file/price.csv) 
+- [chanel](https://github.com/darwinqqq/greenplum/blob/master/file/chanel.csv) 
+- [product](https://github.com/darwinqqq/greenplum/blob/master/file/product.csv) 
+- [region](https://github.com/darwinqqq/greenplum/blob/master/file/region.csv) 
+## [Код для gpfdist](https://github.com/darwinqqq/greenplum/blob/master/function/gpfdist.sql)
+
 # 3."Пользовательские функции"
 ## 1. Создайте 2 пользовательские функции для загрузки данных в созданные таблицы: 
 - 1.Загрузка данных в целевые таблицы должна производиться из внешних EXTERNAL таблиц.
