@@ -5,7 +5,7 @@ CREATE EXTERNAL TABLE std11_3.plan_ext (
 	quantity int4 ,
 	distr_chan varchar(100)
 )
-LOCATION ( 'pxf://gp.plan?PROFILE=Jdbc&JDBC_DRIVER=org.postgresql.Driver&DB_URL=jdbc:postgresql://192.168.214.212:5432/postgres&USER=intern&PASS=intern'
+LOCATION ( 'pxf://gp.plan?PROFILE=Jdbc&JDBC_DRIVER=org.postgresql.Driver&DB_URL=jdbc:postgresql://192.168.214.212:5432/postgres&USER=pass&PASS=pass'
 ) ON ALL
 FORMAT 'CUSTOM' ( FORMATTER='pxfwritable_import' )
 ENCODING 'UTF8';
@@ -23,7 +23,7 @@ CREATE EXTERNAL TABLE std11_3.sales_ext (
 	check_nm varchar(100) ,
 	check_pos varchar(100)
 )
-location ('pxf://gp.sales?PROFILE=Jdbc&JDBC_DRIVER=org.postgresql.Driver&DB_URL=jdbc:postgresql://192.168.214.212:5432/postgres&USER=intern&PASS=intern&PARTITION_BY=date:date&RANGE=2021-01-02:2021-07-26&INTERVAL=1:month'
+location ('pxf://gp.sales?PROFILE=Jdbc&JDBC_DRIVER=org.postgresql.Driver&DB_URL=jdbc:postgresql://192.168.214.212:5432/postgres&USER=pass&PASS=pass&PARTITION_BY=date:date&RANGE=2021-01-02:2021-07-26&INTERVAL=1:month'
 ) 
 FORMAT 'CUSTOM' ( FORMATTER='pxfwritable_import' );
 
