@@ -62,3 +62,43 @@
 ## [Код для создания витрины](https://github.com/darwinqqq/greenplum/blob/master/function/f_mart.sql)
 
 ## [Код для логов](https://github.com/darwinqqq/greenplum/blob/master/function/f_load_write_log.sql)
+# 5.Применение Clickhouse
+### 1. Создайте базу данных на 206 хосте.
+
+### 2. Создайте в своей базе данных интеграционную таблицу ch_plan_fact_ext для доступа к данным витрины plan_fact_YYYYMM в системе Greenplum.
+
+### 3. Создайте следующие словари для доступа к данным таблиц системы Greenplum:
+
+- ch_price_dict
+- ch_chanel_dict
+- ch_product_dict
+- ch_region_dict
+## [Код для создания словарей в click house]
+### 4. Создайте реплицированные таблицы ch_plan_fact на всех хостах кластера. Создайте распределённую таблицу ch_plan_fact_distr, выбрав для неё корректный ключ шардирования. Вставьте в неё все записи из таблицы  ch_plan_fact_ext.
+## [Код для создания реплицированных таблиц]
+
+# 6.Создание дэшборда в Apache Superset
+## 1. Создайте соединение ch_std<номер пользователя> с Clickhouse. 
+
+## 2. Создайте датасет (используя свое соединение) ss_plan_fact с помощью собственного SQL запроса к таблице в Clickhouse и с использованием функций для словарей-справочников. SQL запрос должен формировать аналогичное представление, как в Greenplum (v_plan_fact), с результатами выполнения плана продаж, текстами для кодов и информацией о самом продаваемом товаре в регионе.
+
+## 3. Создайте минимум 5 чартов с различными визуализациями.
+
+## 4. Создайте дэшборд, включите в него созданные чарты.
+Клонировал  репозиторий Superset на GitHub
+```
+git clone --depth=1  https://github.com/apache/superset.git
+```
+Выполнил в папке с docker обазом
+```
+touch ./docker/requirements-local.txt
+
+echo "pip install clickhouse-connect" >> ./docker/requirements-local.txt
+
+docker compose -f docker-compose-non-dev.yml up
+```
+Подключился к click house 
+~~~
+clickhousedb://{username}:{password}@{hostname}:{port}/{database}
+~~~
+
