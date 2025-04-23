@@ -73,9 +73,9 @@
 - ch_chanel_dict
 - ch_product_dict
 - ch_region_dict
-## [Код для создания словарей в click house]
+## [Код для создания словарей в click house](https://github.com/darwinqqq/greenplum/blob/master/function/click%20house.txt)
 ### 4. Создайте реплицированные таблицы ch_plan_fact на всех хостах кластера. Создайте распределённую таблицу ch_plan_fact_distr, выбрав для неё корректный ключ шардирования. Вставьте в неё все записи из таблицы  ch_plan_fact_ext.
-## [Код для создания реплицированных таблиц]
+## [Код для создания реплицированных таблиц](https://github.com/darwinqqq/greenplum/blob/master/function/click%20house2.txt)
 
 # 6.Создание дэшборда в Apache Superset
 ## 1. Создайте соединение ch_std<номер пользователя> с Clickhouse. 
